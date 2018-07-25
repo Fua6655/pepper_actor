@@ -1,0 +1,7 @@
+<launch>
+ <!-- Run Rviz -->
+  <arg name="model" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-f torso -d $(find pepper_interaction)/configure/urdf.rviz" />
+
+  <node pkg="smach_viewer" type="smach_viewer.py" name="smach_viewer" required="true" />
+</launch>

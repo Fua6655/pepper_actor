@@ -1,0 +1,30 @@
+<launch>
+ 
+    <arg name="nao_ip"              default="$(optenv NAO_IP 192.168.1.111)" />
+    <arg name="nao_port"            default="$(optenv NAO_PORT 9559)" />
+    <arg name="namespace"           default="$(optenv ROS_NAMESPACE pepper_robot)" />
+  
+    <node pkg="pepper_interaction" type="asr_tts_server.py" name="asr_tts_server" respawn="false" output="screen" >
+        <param name="pepper_ip"             value="$(arg nao_ip)" />
+        <param name="pepper_port"           value="$(arg nao_port)" />
+    </node>
+
+    <node pkg="pepper_interaction" type="basic_awareness_server.py" name="basic_awareness_server" respawn="false" output="screen" >
+        <param name="pepper_ip"             value="$(arg nao_ip)" />
+        <param name="pepper_port"           value="$(arg nao_port)" />
+    </node>
+
+
+    <node pkg="pepper_interaction" type="behaviours_server.py" name="behaviours_server" respawn="false" output="screen" >
+        <param name="pepper_ip"             value="$(arg nao_ip)" />
+        <param name="pepper_port"           value="$(arg nao_port)" />
+    </node>
+
+    <node pkg="pepper_interaction" type="pose_joint_server.py" name="pose_joint_server" respawn="false" output="screen" >
+        <param name="pepper_ip"             value="$(arg nao_ip)" />
+        <param name="pepper_port"           value="$(arg nao_port)" />
+    </node>
+
+    <include file="$(find pepper_interaction)/launch/rviz_smach.launch"  />
+
+</launch>
